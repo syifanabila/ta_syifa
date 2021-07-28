@@ -13,7 +13,7 @@
 									<!--end::Separator-->
 									<!--begin::Search Form-->
 									<div class="d-flex align-items-center" id="kt_subheader_search">
-										<span class="text-dark-50 font-weight-bold" id="kt_subheader_total">450 Total</span>
+										<span class="text-dark-50 font-weight-bold" id="kt_subheader_total">250</span>
 										<form class="ml-5">
 											<div class="input-group input-group-sm input-group-solid" style="max-width: 175px">
 												<input type="text" class="form-control" id="kt_subheader_search_form" placeholder="Search..." />
@@ -37,52 +37,6 @@
 										</form>
 									</div>
 									<!--end::Search Form-->
-									<!--begin::Group Actions-->
-									<div class="d-flex- align-items-center flex-wrap mr-2 d-none" id="kt_subheader_group_actions">
-										<div class="text-dark-50 font-weight-bold">
-										<span id="kt_subheader_group_selected_rows">23</span>Selected:</div>
-										<div class="d-flex ml-6">
-											<div class="dropdown mr-2" id="kt_subheader_group_actions_status_change">
-												<button type="button" class="btn btn-light-primary font-weight-bolder btn-sm dropdown-toggle" data-toggle="dropdown">Update Status</button>
-												<div class="dropdown-menu p-0 m-0 dropdown-menu-sm">
-													<ul class="navi navi-hover pt-3 pb-4">
-														<li class="navi-header font-weight-bolder text-uppercase text-primary font-size-lg pb-0">Change status to:</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link" data-toggle="status-change" data-status="1">
-																<span class="navi-text">
-																	<span class="label label-light-success label-inline font-weight-bold">Approved</span>
-																</span>
-															</a>
-														</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link" data-toggle="status-change" data-status="2">
-																<span class="navi-text">
-																	<span class="label label-light-danger label-inline font-weight-bold">Rejected</span>
-																</span>
-															</a>
-														</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link" data-toggle="status-change" data-status="3">
-																<span class="navi-text">
-																	<span class="label label-light-warning label-inline font-weight-bold">Pending</span>
-																</span>
-															</a>
-														</li>
-														<li class="navi-item">
-															<a href="#" class="navi-link" data-toggle="status-change" data-status="4">
-																<span class="navi-text">
-																	<span class="label label-light-info label-inline font-weight-bold">On Hold</span>
-																</span>
-															</a>
-														</li>
-													</ul>
-												</div>
-											</div>
-											<button class="btn btn-light-success font-weight-bolder btn-sm mr-2" id="kt_subheader_group_actions_fetch" data-toggle="modal" data-target="#kt_datatable_records_fetch_modal">Fetch Selected</button>
-											<button class="btn btn-light-danger font-weight-bolder btn-sm mr-2" id="kt_subheader_group_actions_delete_all">Delete All</button>
-										</div>
-									</div>
-									<!--end::Group Actions-->
 								</div>
 								<!--end::Details-->
 							</div>
@@ -96,7 +50,35 @@
 								<div class="card card-custom gutter-b">
 									<div class="card-body">
 										<!--begin: Datatable-->
-										<div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
+										<table class="table">
+											<thead class="thead-dark">
+												<tr>
+													<th scope="col">No.</th>
+													<th scope="col">ID Tweet</th>
+													<th scope="col">Created At</th>
+													<th scope="col">Text Tweet</th>
+												</tr>
+											</thead>
+											<tbody>
+											<?php
+
+												foreach($data->result_array() as $i):
+													$no=$i['id'];
+													$id=$i['tweet_id'];
+													$date=$i['created_at'];
+													$text=$i['text'];
+
+											?>
+												<tr>
+													<td><?php echo $no;?></td>
+													<td><?php echo $id;?></td>
+													<td><?php echo $date;?></td>
+													<td><?php echo $text;?></td>
+												</tr>
+											
+												<?php endforeach;?>
+											</tbody>
+										</table>
 										<!--end: Datatable-->
 									</div>
 								</div>

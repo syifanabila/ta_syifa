@@ -13,7 +13,7 @@
 									<!--end::Separator-->
 									<!--begin::Search Form-->
 									<div class="d-flex align-items-center" id="kt_subheader_search">
-										<span class="text-dark-50 font-weight-bold" id="kt_subheader_total">450 Total</span>
+										<span class="text-dark-50 font-weight-bold" id="kt_subheader_total">250</span>
 										<form class="ml-5">
 											<div class="input-group input-group-sm input-group-solid" style="max-width: 175px">
 												<input type="text" class="form-control" id="kt_subheader_search_form" placeholder="Search..." />
@@ -96,7 +96,28 @@
 								<div class="card card-custom gutter-b">
 									<div class="card-body">
 										<!--begin: Datatable-->
-										<div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
+										<table class="table">
+											<thead class="thead-dark">
+												<tr>
+													<th scope="col">No.</th>
+													<th scope="col">Text Tweet</th>
+												</tr>
+											</thead>
+											<tbody>
+											<?php
+
+												foreach($data->result_array() as $y):
+													$no=$y['id'];
+													$id=$y['tweet'];
+											?>
+												<tr>
+													<td><?php echo $no;?></td>
+													<td><?php echo $id;?></td>
+												</tr>
+											</tbody>
+
+											<?php endforeach;?>
+										</table>
 										<!--end: Datatable-->
 									</div>
 								</div>
