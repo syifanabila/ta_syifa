@@ -3,22 +3,25 @@ import numpy as np
 import pandas as pd
 import mysql.connector
 from sklearn.feature_extraction.text import TfidfVectorizer
+from mysql.connector import Error
 
+global id_query
 # Connect to database
 db = mysql.connector.connect(host='localhost',
-                             database='bismillah_ta',
+                             database='2107-reqtacosin-syifa',
                              user='root',
                              password='',
                              charset='utf8'
                             )
 
-getDb = pd.read_sql_query("select tweet from prepro1", db)
+
+getDb = pd.read_sql_query("select tweet from prepro1 LIMIT 2", db)
 df = pd.DataFrame(getDb)
-print(df)
+# print(df)
 corpus = df["tweet"].values.tolist()
-print("Dataset to list :\n", corpus)
-for row in corpus:
-    print(row)
+# print("Dataset to list :\n", corpus)
+# for row in corpus:
+    # print(row)
 
 # vectorize = TfidfVectorizer()
 # x = vectorize.fit_transform(df['tweet'])
@@ -30,20 +33,82 @@ for row in corpus:
 print("input your keyword :")
 inp = input()
 vocab = inp.split(" ")
+
+"""
+   connect to MySQL database and set query
+   """
+try:
+    if db.is_connected():
+        """
+        Insert data query
+        """
+        cursor = db.cursor()
+        # twitter, golf
+        query = f"INSERT INTO set_query (keyword) VALUES ('{inp}')"
+        cursor.execute(query)
+
+        id_query = cursor.getlastrowid()
+        db.commit()
+
+except Error as e:
+    print(e)
+
+cursor.close()
+# db.close()
+
+
+
     
 # TF
 def compute_tf(corpus):
     for doc in corpus:
-        doc1_lst = doc.split(" ")
-        wordDict_1= dict.fromkeys(set(doc1_lst), 0)
 
+        kata_tf = []
+        jumlah_tf = []
+        doc1_lst = doc.split(" ")
+
+        wordDict_1= dict.fromkeys(set(doc1_lst), 0)
         for token in doc1_lst:
-            wordDict_1[token] +=  1
+
+            wordDict_1[token] += 1
+            if len(kata_tf) == 0:
+                    kata_tf.append(token)
+            else:
+                try:
+                    kata_tf.index(token)
+                except :
+                    kata_tf.append(token)
+
+            # hitung masing-masing jml
+            for kata in kata_tf:
+
+                jml = 0
+                for find in doc1_lst:
+
+                    if kata == find:
+                        jml += 1
+
+                jumlah_tf.append(str(jml))
+
         df = pd.DataFrame([wordDict_1])
         idx = 0
-        new_col = ["Term Frequency"]    
+        new_col = ["Term Frequency"]
         df.insert(loc=idx, column='Dataset', value=new_col)
+
         print(df)
+        divideKata = "-".join(kata_tf)
+        divideValue = "-".join(jumlah_tf)
+
+        """
+        Insert data query
+        """
+        cursor = db.cursor()
+        query = f"INSERT INTO term_frequency (id_query, text, tf) VALUES ('{id_query}','{divideKata}', '{divideValue}')"
+        cursor.execute(query)
+
+        db.commit()
+        cursor.close()
+
 compute_tf(corpus)
 
 #Normalized Term Frequency
@@ -53,17 +118,50 @@ def termFrequency(term, document):
 
 def compute_normalizedtf(corpus):
     tf_doc = []
+
     for txt in corpus["tweet"]:
         sentence = txt.split()
         norm_tf= dict.fromkeys(set(sentence), 0)
+
+        kata_arr = []
+        nilai = []
+
         for word in sentence:
             norm_tf[word] = termFrequency(word, txt)
+
+            if len(kata_arr) == 0:
+                kata_arr.append(word)
+                nilai.append(str(termFrequency(word, txt)))
+            else:
+                try:
+                    kata_arr.index(word)
+                except:
+                    kata_arr.append(word)
+                    nilai.append(str(termFrequency(word, txt)))
+
+        # print(kata_arr)
+        # print(nilai)
         tf_doc.append(norm_tf)
         df = pd.DataFrame([norm_tf])
         idx = 0
-        new_col = ["Normalized TF"]    
+        new_col = ["Normalized TF"]
         df.insert(loc=idx, column='Dataset', value=new_col)
         print(df)
+
+        # insert
+        divideKata = "-".join(kata_arr)
+        divideValue = "-".join(nilai)
+
+        """
+        Insert data query
+        """
+        cursor = db.cursor()
+        query = f"INSERT INTO normalize_term_frequency (id_query, text, normalize_tf) VALUES ('{id_query}','{divideKata}', '{divideValue}')"
+        cursor.execute(query)
+
+        db.commit()
+        cursor.close()
+
     return tf_doc
 
 tf_doc = compute_normalizedtf(df)
@@ -140,7 +238,7 @@ def compute_query_idf(vocab):
         idf_dict_qry[word] = inverseDocumentFrequency(word ,documents)
     return idf_dict_qry
 idf_dict_qry = compute_query_idf(vocab)
-print("\nQuery IDF :")
+# print("\nQuery IDF :")
 data = list(idf_dict_qry.items())
 an_array = np.array(data)
 df_idf = pd.DataFrame(an_array)
@@ -206,7 +304,7 @@ def rank_similarity_docs(data):
         cos_sim.append(cosine_similarity(tfidf_dict_qry, df , vocab , doc_num).tolist())
     return cos_sim
 similarity_docs = rank_similarity_docs(documents)
-print(list(flatten(similarity_docs)))
+# print(list(flatten(similarity_docs)))
 # result = pd.DataFrame(similarity_docs, columns=["Result"])
 # result_clean = result.fillna(0)
 print("Similarity of dataset")
@@ -214,6 +312,7 @@ print("Similarity of dataset")
 # print(result_clean.iloc[result_clean.idxmax()])
 
 print("============End Of Cosine Similarity=================")
+db.close()
 
 
 
