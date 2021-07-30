@@ -79,7 +79,6 @@ def insert_mysql(tweet, tag=0):
             cursor.execute(query, (tweet, tag))
             con.commit()
 
-
     except Error as e:
         print(e)
 
