@@ -2,20 +2,20 @@
 
 class M_prepro extends CI_Model {
     
-    function data_prepro() {
+    function data_prepro($limit, $start) {
 
-        $prepro = $this->db->query("SELECT id, tweet FROM prepro1");
+        $prepro = $this->db->get("prepro1", $limit, $start)->result_array();
         
         return $prepro;
     }
 
-    // function count_data() {
+    function count_data() {
         
-    //     $count = $this->db->query("SELECT * FROM dataset1");
+        $count = $this->db->get("prepro1")->num_rows();
         
-    //     return $count->num_rows;
+        return $count;
 
-    // }
+    }
 
 }
 

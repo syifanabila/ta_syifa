@@ -41,7 +41,7 @@
 											<tbody>
 											<?php
 
-												foreach($data->result_array() as $y):
+												foreach($data as $y):
 													$no=$y['id'];
 													$id=$y['tweet'];
 											?>
@@ -53,6 +53,7 @@
 
 											<?php endforeach;?>
 										</table>
+										<?= $this->pagination->create_links(); ?>
 										<!--end: Datatable-->
 									</div>
 								</div>
