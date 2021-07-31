@@ -35,6 +35,7 @@
 		<!--end::Page Scripts-->
 		<!--begin::Page Scripts(used by this page)-->
 		<script src="assets/assets/js/pages/custom/contacts/list-datatable.js"></script>
+		<script src="assets/js/pages/crud/ktdatatable/advanced/modal.js"></script>
 		<!--end::Page Scripts-->
 	</body>
 	<!--end::Body-->

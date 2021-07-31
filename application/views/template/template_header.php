@@ -19,7 +19,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5FS8GGP');</script>
 		<!-- End Google Tag Manager -->
 		<meta charset="utf-8" />
-		<title>Metronic Live preview | Keenthemes</title>
+		<title>Information Retrieval System</title>
 		<meta name="description" content="Updates and statistics" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 		<link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -36,7 +36,7 @@ License: You must have a valid license purchased only from themeforest(the above
 		<!--end::Global Theme Styles-->
 		<!--begin::Layout Themes(used by all pages)-->
 		<!--end::Layout Themes-->
-		<link rel="shortcut icon" href="<?php echo base_url() ?>assets/assets/media/logos/favicon.ico" />
+		<link rel="shortcut icon" href="<?php echo base_url() ?>assets/assets/media/logos/Logo-Budi-Luhur-Universitas-Budi-Luhur-PNG.png" />
 		<!-- Hotjar Tracking Code for keenthemes.com -->
 		<script>(function(h,o,t,j,a,r){ h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)}; h._hjSettings={hjid:1070954,hjsv:6}; a=o.getElementsByTagName('head')[0]; r=o.createElement('script');r.async=1; r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv; a.appendChild(r); })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');</script>
 	</head>
@@ -93,7 +93,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								<div class="d-none d-lg-flex align-items-center mr-3">
 									<!--begin::Logo-->
 									<a href="/metronic/demo9/index.html" class="mr-20">
-										<img alt="Logo" src="https://rekreartive.com/wp-content/uploads/2018/10/Logo-Budi-Luhur-Universitas-Budi-Luhur-PNG.png" class="max-h-70px" />
+										<img alt="Logo" src="assets/assets/media/logos/cropped-logo_fti_ubl.png" class="max-h-70px" />
 									</a>
 									<!--end::Logo-->
 									<!--begin::Desktop Search-->
@@ -158,28 +158,24 @@ License: You must have a valid license purchased only from themeforest(the above
 												<a href="<?php echo base_url('preprocessing') ?>" class="menu-link">
 													<span class="menu-text">Preprocessing</span>
 													<span class="menu-desc">Hasil Preprocessing</span>
-													<i class="menu-arrow"></i>
 												</a>
 											</li>
 											<li class="menu-item menu-item-submenu menu-item-rel" data-menu-toggle="hover" aria-haspopup="true">
 												<a href="<?php echo base_url('tfidf') ?>" class="menu-link">
 													<span class="menu-text">TF-IDF</span>
 													<span class="menu-desc">Hasil Pembobotan TF-IDF</span>
-													<i class="menu-arrow"></i>
 												</a>
 											</li>
 											<li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
 												<a href="<?php echo base_url('cosine') ?>" class="menu-link">
 													<span class="menu-text">Cosine Similarity</span>
 													<span class="menu-desc">Hasil Perhitungan Nilai Cosine</span>
-													<i class="menu-arrow"></i>
 												</a>
 											</li>
 											<li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
 												<a href="<?php echo base_url('akurasi') ?>" class="menu-link">
 													<span class="menu-text">Akurasi</span>
 													<span class="menu-desc">Hasil Pengujian</span>
-													<i class="menu-arrow"></i>
 												</a>
 											</li>
 										</ul>

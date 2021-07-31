@@ -8,13 +8,13 @@ from mysql.connector import Error
 global id_query
 # Connect to database
 db = mysql.connector.connect(host='localhost',
-							 database='2107-reqtacosin-syifa',
+							 database='ta_syifa',
 							 user='root',
 							 password='',
 							 charset='utf8'
 							 )
 
-getDb = pd.read_sql_query("select tweet from prepro1 LIMIT 2", db)
+getDb = pd.read_sql_query("select tweet from prepro1", db)
 df = pd.DataFrame(getDb)
 # print(df)
 corpus = df["tweet"].values.tolist()

@@ -75,7 +75,30 @@
 								<div class="card card-custom gutter-b">
 									<div class="card-body">
 										<!--begin: Datatable-->
-										<div class="datatable datatable-bordered datatable-head-custom" id="kt_datatable"></div>
+										<table class="table">
+											<thead class="bg-primary table-hover table-bordered">
+												<tr>
+													<th scope="col">ID</th>
+													<th scope="col">ID Query</th>
+													<th scope="col">Data</th>
+												</tr>
+											</thead>
+											<tbody>
+											<?php
+												foreach($data as $c):
+													$no=$c['id_cosin_similarity'];
+													$id=$c['id_query'];
+													$data=$c['data'];
+											?>
+												<tr>
+													<td><?php echo $no;?></td>
+													<td><?php echo $id;?></td>
+													<td><?php echo $data;?></td>
+												</tr>
+											</tbody>
+											<?php endforeach;?>
+										</table>
+										<?= $this->pagination->create_links(); ?>
 										<!--end: Datatable-->
 									</div>
 								</div>
