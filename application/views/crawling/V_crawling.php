@@ -30,7 +30,7 @@
 									<div class="card-body">
 										<!--begin: Datatable-->
 										<table class="table">
-											<thead class="thead-dark">
+											<thead class="bg-primary table-hover table-bordered">
 												<tr>
 													<th scope="col">No.</th>
 													<th scope="col">ID Tweet</th>
