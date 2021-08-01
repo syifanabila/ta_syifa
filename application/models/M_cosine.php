@@ -17,6 +17,15 @@ class M_cosine extends CI_Model {
 
     }
 
+
+
+
+    function ambilDataCosine() {
+
+        $sql = "SELECT * FROM cosine_similarity JOIN set_query ON set_query.id_query = cosine_similarity.id_query";
+        return $this->db->query( $sql );
+    }
+
 }
 
 ?>

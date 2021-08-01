@@ -31,51 +31,51 @@
 								<div class="card card-custom gutter-b">
 									<div class="card-body">
 										<!--begin: Datatable-->
-										<table class="table">
-											<thead class="bg-primary table-hover table-bordered">
+										<!--begin: Datatable-->
+										<table class="table" id="kt_datatable">
+											<thead>
 												<tr>
 													<th scope="col">ID</th>
-													<th scope="col">ID Query</th>
-													<th scope="col">Data</th>
+													<th scope="col">Query</th>
+													<th scope="col">Created At</th>
+													<th>Opsi</th>
 												</tr>
 											</thead>
 											<tbody>
+											<?php
+
+												foreach($query->result_array() as $q):
+													$id=$q['id_query'];
+													$query=$q['keyword'];
+													$date=$q['created_at'];
+											?>
 												<tr>
-													<td>dsad</td>
-													<td>sdasd</td>
-													<td>sadasd</td>
+													<td><?php echo $id;?></td>
+													<td><?php echo $query;?></td>
+													<td><?php echo $date;?></td>
+													<td>
+														<a href="<?php echo base_url('dashboard/detail/'. $id) ?>" class="btn btn-sm btn-primary">Detail</a>
+													</td>
 												</tr>
 											</tbody>
-										</table>
+											<?php endforeach;?>
+										</table>	
 										<!--end: Datatable-->
 									</div>
 								</div>
 								<!--end::Card-->
-								<!--begin::Modal-->
-								<div class="modal fade" id="kt_datatable_records_fetch_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-									<div class="modal-dialog modal-dialog-centered" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">Selected Records</h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true"></span>
-												</button>
-											</div>
-											<div class="modal-body">
-												<div class="kt-scroll" data-scroll="true" data-height="200">
-													<ul id="kt_apps_user_fetch_records_selected"></ul>
-												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!--end::Modal-->
 							</div>
 							<!--end::Container-->
 						</div>
 						<!--end::Entry-->
 					</div>
 					<!--end::Content-->
+
+					<script>
+
+			var table = $('#kt_datatable');
+
+			// begin first table
+			table.DataTable();
+
+		</script>

@@ -6,14 +6,11 @@
 								<!--begin::Details-->
 								<div class="d-flex align-items-center flex-wrap mr-2">
 									<!--begin::Title-->
-									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Hasil Perhitungan Cosine</h5>
+									<h5 class="text-dark font-weight-bold mt-2 mb-2 mr-5">Menampilkan hasil <?php echo $syifa['keyword'] ?></h5>
 									<!--end::Title-->
 									<!--begin::Separator-->
 									<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
 									<!--end::Separator-->
-									<!--begin::Search Form-->
-									
-									<!--end::Search Form-->
 								</div>
 								<!--end::Details-->
 							</div>
@@ -26,14 +23,17 @@
 								<!--begin::Card-->
 								<div class="card card-custom gutter-b">
 									<div class="card-body">
+										<!--begin: Datatable-->
 										<table class="table" id="kt_datatable">
-											<thead>
-												<tr>
-													<th scope="col">ID</th>
-													<th scope="col">Query</th>
-												</tr>
-											</thead>
-										</table>
+                                            <thead>
+                                                <tr>
+                                                    <th scope="col">ID</th>
+                                                    <th scope="col">Query</th>
+                                                    <th scope="col">Nilai</th>
+                                                </tr>
+                                            </thead>
+                                        </table>
+										<!--end: Datatable-->
 									</div>
 								</div>
 								<!--end::Card-->
@@ -44,8 +44,6 @@
 					</div>
 					<!--end::Content-->
 
-
-
 					<script>
                         
                         var table = $('#kt_datatable');
@@ -54,7 +52,7 @@
                         table.DataTable({
                             responsive: true,
                             ajax: {
-                                url: HOST_URL + 'cosine/hasil',
+                                url: HOST_URL + 'dashboard/hasil/<?php echo $id_query ?>',
                                 type: 'POST',
                                 data: {
                                     pagination: {
@@ -64,7 +62,8 @@
                             },
                             columns: [
                                 {data: 'RecordID'},
-                                {data: 'keyword'}
+                                {data: 'tweet'},
+                                {data: 'value'},
                             ],
 
                         })

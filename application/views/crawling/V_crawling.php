@@ -13,7 +13,7 @@
 									<!--end::Separator-->
 									<!--begin::Search Form-->
 									<div class="d-flex align-items-center" id="kt_subheader_search">
-										<span class="text-dark-50 font-weight-bold" id="kt_subheader_total">250</span>
+										<span class="text-dark-50 font-weight-bold" id="kt_subheader_total"><?php echo count($data) ?></span>
 									</div>
 									<!--end::Search Form-->
 								</div>

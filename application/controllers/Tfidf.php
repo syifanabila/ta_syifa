@@ -93,6 +93,227 @@
                 
                 $this->load->view('template/template_footer');
             }
+
+
+
+
+
+
+
+            // detail
+            function detail( $id_query ) {
+
+                $set['id_query'] = $id_query;
+                $set['query'] = $this->M_tfidf->ambilTabel('set_query', $id_query)->row_array();
+
+                $this->load->view('template/template_header');
+
+                $this->load->view('tfidf/V_tfidf_detail', $set);
+                
+                $this->load->view('template/template_footer');
+            }
+
+
+
+            // data tf
+            function tf( $id_query ) {
+
+                $tf = $this->M_tfidf->ambilTabel('term_frequency', $id_query);
+                $data = array();
+
+                // total
+                $total = $tf->num_rows();
+
+                $nomor = 1;
+                foreach ( $tf->result_array() AS $row ) {
+
+                    // memisahkan kata
+                    $text = "";
+                    $explodeText = explode('-', $row['text']);
+                    $tf = explode('-', $row['tf']);
+
+                    $i = 0;
+                    foreach ( $explodeText AS $et ) {
+
+                        if ( $et ){
+
+                            $text .= $et.'('.$tf[$i].') &nbsp; ';
+                        }
+                        $i++;
+                    }
+
+
+
+                    array_push( $data, array(
+
+                        'RecordID' => $nomor,
+                        'text'  => $text                        
+                    ) );
+
+                    $nomor++;
+                }
+
+
+                echo json_encode([
+                    'recordsTotal'      => $total,
+                    'recordsFiltered'   => $total,
+                    'data' => $data
+                ]);
+            }
+
+
+
+
+
+
+            // normalize 
+            function ntf( $id_query ) {
+
+                $tf = $this->M_tfidf->ambilTabel('normalize_term_frequency', $id_query);
+                $data = array();
+
+                // total
+                $total = $tf->num_rows();
+
+                $nomor = 1;
+                foreach ( $tf->result_array() AS $row ) {
+
+                    // memisahkan kata
+                    $text = "";
+                    $explodeText = explode('-', $row['text']);
+                    $ntf = explode('-', $row['normalize_tf']);
+
+                    $i = 0;
+                    foreach ( $explodeText AS $et ) {
+
+                        if ( $et ){
+
+                            $text .= $et.' &emsp;:  ('.$ntf[$i].') <br>';
+                        }
+                        $i++;
+                    }
+
+
+
+                    array_push( $data, array(
+
+                        'RecordID' => $nomor,
+                        'text'  => $text                        
+                    ) );
+
+                    $nomor++;
+                }
+
+
+                echo json_encode([
+                    'recordsTotal'      => $total,
+                    'recordsFiltered'   => $total,
+                    'data' => $data
+                ]);
+            }
+
+
+
+
+
+
+
+
+
+            // idf
+            function idf( $id_query ) {
+
+                $tf = $this->M_tfidf->ambilTabel('idf', $id_query);
+                $data = array();
+
+                // total
+                $total = $tf->num_rows();
+
+                $nomor = 1;
+                foreach ( $tf->result_array() AS $row ) {
+
+                    array_push( $data, array(
+
+                        'RecordID' => $nomor,
+                        'text'  => $row['kata'],
+                        'idf'   => $row['idf']         
+                    ) );
+
+                    $nomor++;
+                }
+
+
+                echo json_encode([
+                    'recordsTotal'      => $total,
+                    'recordsFiltered'   => $total,
+                    'data' => $data
+                ]);
+            }
+
+
+
+            // term_query
+            function term_query( $id_query ) {
+
+                $tf = $this->M_tfidf->ambilTabel('term_query', $id_query);
+                $data = array();
+
+                // total
+                $total = $tf->num_rows();
+
+                $nomor = 1;
+                foreach ( $tf->result_array() AS $row ) {
+
+                    array_push( $data, array(
+
+                        'RecordID' => $nomor,
+                        'doc'  => $row['document'],
+                        'value'   => $row['keyword']         
+                    ) );
+
+                    $nomor++;
+                }
+
+
+                echo json_encode([
+                    'recordsTotal'      => $total,
+                    'recordsFiltered'   => $total,
+                    'data' => $data
+                ]);
+            }
+            
+            
+            
+            
+            // query TF | IDF | TF-IDF
+            function query_t( $type, $id_query ) {
+
+                $tf = $this->M_tfidf->query_t( $type , $id_query);
+                $data = array();
+
+                // total
+                $total = $tf->num_rows();
+
+                $nomor = 1;
+                foreach ( $tf->result_array() AS $row ) {
+
+                    array_push( $data, array(
+
+                        'RecordID' => $nomor,
+                        'doc'  => $row['res_query'],
+                        'value'   => $row['res_value']         
+                    ) );
+
+                    $nomor++;
+                }
+
+
+                echo json_encode([
+                    'recordsTotal'      => $total,
+                    'recordsFiltered'   => $total,
+                    'data' => $data
+                ]);
+            }
         
         }
         

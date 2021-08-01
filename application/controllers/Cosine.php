@@ -60,6 +60,42 @@
             
             $this->load->view('template/template_footer');
         }
+
+
+
+
+        function hasil() {
+
+            $cs = $this->M_cosine->ambilDataCosine();
+            $data = array();
+
+            // total
+            $total = $cs->num_rows();
+
+            $nomor = 1;
+            foreach ( $cs->result_array() AS $row ) {
+
+                $query = '<b>'.$row['keyword'].'</b>';
+
+                $split = explode('-', $row['data']);
+                $join = implode('&emsp;', $split);
+
+                array_push( $data, array(
+
+                    'RecordID' => $nomor,
+                    'keyword' => $query.'<hr>'. $join,
+                ) );
+
+                $nomor++;
+            }
+
+
+            echo json_encode([
+                'recordsTotal' => $total,
+                'recordsFiltered' => $total,
+                'data' => $data
+            ]);
+        }
     
     }
     

@@ -8,7 +8,7 @@ from mysql.connector import Error
 global id_query
 # Connect to database
 db = mysql.connector.connect(host='localhost',
-							 database='ta_syifa',
+							 database='2107-reqtacosin-syifa',
 							 user='root',
 							 password='',
 							 charset='utf8'
@@ -78,16 +78,16 @@ def compute_tf(corpus):
 				except:
 					kata_tf.append(token)
 
-			# hitung masing-masing jml
-			for kata in kata_tf:
+		# hitung masing-masing jml
+		for kata in kata_tf:
 
-				jml = 0
-				for find in doc1_lst:
+			jml = 0
+			for find in doc1_lst:
 
-					if kata == find:
-						jml += 1
+				if kata == find:
+					jml += 1
 
-				jumlah_tf.append(str(jml))
+			jumlah_tf.append(str(jml))
 
 		df = pd.DataFrame([wordDict_1])
 		idx = 0
