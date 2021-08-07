@@ -11,13 +11,6 @@
 									<!--begin::Separator-->
 									<div class="subheader-separator subheader-separator-ver mt-2 mb-2 mr-5 bg-gray-200"></div>
 									<!--end::Separator-->
-									<!--begin::Search Form-->
-									<div class="d-flex align-items-center" id="kt_subheader_search">
-									<select class="form-control">
-										<option>Select Query</option>
-									</select>
-									</div>
-									<!--end::Search Form-->
 								</div>
 								<!--end::Details-->
 							</div>

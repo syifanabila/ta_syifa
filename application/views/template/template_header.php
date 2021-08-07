@@ -112,7 +112,7 @@ License: You must have a valid license purchased only from themeforest(the above
 								<div class="d-none d-lg-flex align-items-center mr-3">
 									<!--begin::Logo-->
 									<a href="/metronic/demo9/index.html" class="mr-20">
-										<img alt="Logo" src="assets/assets/media/logos/cropped-logo_fti_ubl.png" class="max-h-70px" />
+										<img alt="Logo" src="<?php echo base_url() ?>assets/assets/media/logos/cropped-logo_fti_ubl.png" class="max-h-70px" />
 									</a>
 									<!--end::Logo-->
 									<!--begin::Desktop Search-->
@@ -189,12 +189,6 @@ License: You must have a valid license purchased only from themeforest(the above
 												<a href="<?php echo base_url('cosine') ?>" class="menu-link">
 													<span class="menu-text">Cosine Similarity</span>
 													<span class="menu-desc">Hasil Perhitungan Nilai Cosine</span>
-												</a>
-											</li>
-											<li class="menu-item menu-item-submenu" data-menu-toggle="hover" aria-haspopup="true">
-												<a href="<?php echo base_url('akurasi') ?>" class="menu-link">
-													<span class="menu-text">Akurasi</span>
-													<span class="menu-desc">Hasil Pengujian</span>
 												</a>
 											</li>
 										</ul>
